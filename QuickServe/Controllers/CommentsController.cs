@@ -58,6 +58,7 @@ namespace QuickServe.Controllers
             return CreatedAtAction(nameof(GetComment), new { id = comment.CommentId }, comment);
         }
 
+
         // DELETE: api/Comments/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteComment(int id)
@@ -71,8 +72,9 @@ namespace QuickServe.Controllers
             _context.Comments.Remove(comment);
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            return Ok(new { message = "Comment deleted successfully." });
         }
+
 
         // GET: api/Comments/Product/5
         [HttpGet("Product/{productId}")]

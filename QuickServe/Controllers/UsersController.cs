@@ -85,8 +85,9 @@ namespace QuickServe.Controllers
                 }
             }
 
-            return NoContent();
+            return Ok(new { message = "User updated successfully." });
         }
+
 
         // DELETE: api/Users/5
         [HttpDelete("{id}")]
@@ -101,7 +102,7 @@ namespace QuickServe.Controllers
             _context.Users.Remove(user);
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            return Ok(new { message = "User deleted successfully." });
         }
 
         private bool UserExists(int id)

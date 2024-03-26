@@ -78,8 +78,9 @@ namespace QuickServe.Controllers
                 }
             }
 
-            return NoContent();
+            return Ok(new { message = "Product updated successfully." });
         }
+
 
         // DELETE: api/Products/5
         [HttpDelete("{id}")]
@@ -94,8 +95,9 @@ namespace QuickServe.Controllers
             _context.Product.Remove(product);
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            return Ok(new { message = "Product deleted successfully." });
         }
+
 
         private bool ProductExists(int id)
         {

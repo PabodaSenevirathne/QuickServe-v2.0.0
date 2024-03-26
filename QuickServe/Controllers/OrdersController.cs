@@ -70,6 +70,53 @@ namespace QuickServe.Controllers
             return orders;
         }
 
+        // PUT: api/Orders/5
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateOrder(int id, Orders order)
+        {
+            if (id != order.OrderId)
+            {
+                return BadRequest();
+            }
+
+            _context.Entry(order).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!OrderExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return Ok(new { message = "Order updated successfully." });
+        }
+
+        // DELETE: api/Orders/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> CancelOrder(int id)
+        {
+            var order = await _context.Orders.FindAsync(id);
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            _context.Orders.Remove(order);
+            await _context.SaveChangesAsync();
+
+            return Ok(new { message = "Order canceled successfully." });
+        }
+
+
         private bool OrderExists(int id)
         {
             return _context.Orders.Any(e => e.OrderId == id);
