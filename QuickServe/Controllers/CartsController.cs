@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using QuickServe.Data;
 using QuickServe.Models;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace QuickServe.Controllers
 {
@@ -25,42 +23,51 @@ namespace QuickServe.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Cart>>> GetCart()
         {
-          if (_context.Cart == null)
-          {
-              return NotFound();
-          }
-            return await _context.Cart.ToListAsync();
+            var carts = await _context.Cart.ToListAsync();
+            if (carts == null || !carts.Any())
+            {
+                return NotFound();
+            }
+            return carts;
         }
 
         // GET: api/Carts/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Cart>> GetCart(int id)
+        public async Task<ActionResult<Cart>> GetCartItem(int id)
         {
-          if (_context.Cart == null)
-          {
-              return NotFound();
-          }
-            var cart = await _context.Cart.FindAsync(id);
-
-            if (cart == null)
+            var cartItem = await _context.Cart.FindAsync(id);
+            if (cartItem == null)
             {
                 return NotFound();
             }
+            return cartItem;
+        }
 
-            return cart;
+        // POST: api/Carts
+        [HttpPost]
+        public async Task<ActionResult<Cart>> AddToCart(Cart cartItem)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            _context.Cart.Add(cartItem);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(GetCartItem), new { id = cartItem.CartId }, cartItem);
         }
 
         // PUT: api/Carts/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCart(int id, Cart cart)
+        public async Task<IActionResult> UpdateCartItemQuantity(int id, Cart cartItem)
         {
-            if (id != cart.CartId)
+            if (id != cartItem.CartId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(cart).State = EntityState.Modified;
+            _context.Entry(cartItem).State = EntityState.Modified;
 
             try
             {
@@ -68,7 +75,7 @@ namespace QuickServe.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CartExists(id))
+                if (!CartItemExists(id))
                 {
                     return NotFound();
                 }
@@ -81,44 +88,164 @@ namespace QuickServe.Controllers
             return NoContent();
         }
 
-        // POST: api/Carts
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<Cart>> PostCart(Cart cart)
-        {
-          if (_context.Cart == null)
-          {
-              return Problem("Entity set 'QuickServeContext.Cart'  is null.");
-          }
-            _context.Cart.Add(cart);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetCart", new { id = cart.CartId }, cart);
-        }
-
         // DELETE: api/Carts/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCart(int id)
+        public async Task<IActionResult> DeleteCartItem(int id)
         {
-            if (_context.Cart == null)
-            {
-                return NotFound();
-            }
-            var cart = await _context.Cart.FindAsync(id);
-            if (cart == null)
+            var cartItem = await _context.Cart.FindAsync(id);
+            if (cartItem == null)
             {
                 return NotFound();
             }
 
-            _context.Cart.Remove(cart);
+            _context.Cart.Remove(cartItem);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool CartExists(int id)
+        // GET: api/Carts/User/5
+        [HttpGet("User/{userId}")]
+        public async Task<ActionResult<IEnumerable<Cart>>> GetCartItemsByUserId(int userId)
         {
-            return (_context.Cart?.Any(e => e.CartId == id)).GetValueOrDefault();
+            var cartItems = await _context.Cart.Where(c => c.UserId == userId).ToListAsync();
+            if (cartItems == null || !cartItems.Any())
+            {
+                return NotFound();
+            }
+            return cartItems;
+        }
+
+        private bool CartItemExists(int id)
+        {
+            return _context.Cart.Any(e => e.CartId == id);
         }
     }
 }
+
+
+
+//using System;
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Threading.Tasks;
+//using Microsoft.AspNetCore.Http;
+//using Microsoft.AspNetCore.Mvc;
+//using Microsoft.EntityFrameworkCore;
+//using QuickServe.Data;
+//using QuickServe.Models;
+
+//namespace QuickServe.Controllers
+//{
+//    [Route("api/[controller]")]
+//    [ApiController]
+//    public class CartsController : ControllerBase
+//    {
+//        private readonly QuickServeContext _context;
+
+//        public CartsController(QuickServeContext context)
+//        {
+//            _context = context;
+//        }
+
+//        // GET: api/Carts
+//        [HttpGet]
+//        public async Task<ActionResult<IEnumerable<Cart>>> GetCart()
+//        {
+//          if (_context.Cart == null)
+//          {
+//              return NotFound();
+//          }
+//            return await _context.Cart.ToListAsync();
+//        }
+
+//        // GET: api/Carts/5
+//        [HttpGet("{id}")]
+//        public async Task<ActionResult<Cart>> GetCart(int id)
+//        {
+//          if (_context.Cart == null)
+//          {
+//              return NotFound();
+//          }
+//            var cart = await _context.Cart.FindAsync(id);
+
+//            if (cart == null)
+//            {
+//                return NotFound();
+//            }
+
+//            return cart;
+//        }
+
+//        // PUT: api/Carts/5
+//        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+//        [HttpPut("{id}")]
+//        public async Task<IActionResult> PutCart(int id, Cart cart)
+//        {
+//            if (id != cart.CartId)
+//            {
+//                return BadRequest();
+//            }
+
+//            _context.Entry(cart).State = EntityState.Modified;
+
+//            try
+//            {
+//                await _context.SaveChangesAsync();
+//            }
+//            catch (DbUpdateConcurrencyException)
+//            {
+//                if (!CartExists(id))
+//                {
+//                    return NotFound();
+//                }
+//                else
+//                {
+//                    throw;
+//                }
+//            }
+
+//            return NoContent();
+//        }
+
+//        // POST: api/Carts
+//        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+//        [HttpPost]
+//        public async Task<ActionResult<Cart>> PostCart(Cart cart)
+//        {
+//          if (_context.Cart == null)
+//          {
+//              return Problem("Entity set 'QuickServeContext.Cart'  is null.");
+//          }
+//            _context.Cart.Add(cart);
+//            await _context.SaveChangesAsync();
+
+//            return CreatedAtAction("GetCart", new { id = cart.CartId }, cart);
+//        }
+
+//        // DELETE: api/Carts/5
+//        [HttpDelete("{id}")]
+//        public async Task<IActionResult> DeleteCart(int id)
+//        {
+//            if (_context.Cart == null)
+//            {
+//                return NotFound();
+//            }
+//            var cart = await _context.Cart.FindAsync(id);
+//            if (cart == null)
+//            {
+//                return NotFound();
+//            }
+
+//            _context.Cart.Remove(cart);
+//            await _context.SaveChangesAsync();
+
+//            return NoContent();
+//        }
+
+//        private bool CartExists(int id)
+//        {
+//            return (_context.Cart?.Any(e => e.CartId == id)).GetValueOrDefault();
+//        }
+//    }
+//}
