@@ -33,7 +33,7 @@ namespace QuickServe.Controllers
 
         // GET: api/Carts/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Cart>> GetCartItem(int id)
+        public async Task<ActionResult<Cart>> GetCartByCartId(int id)
         {
             var cartItem = await _context.Cart.FindAsync(id);
             if (cartItem == null)
@@ -55,12 +55,12 @@ namespace QuickServe.Controllers
             _context.Cart.Add(cartItem);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetCartItem), new { id = cartItem.CartId }, cartItem);
+            return CreatedAtAction(nameof(GetCartByCartId), new { id = cartItem.CartId }, cartItem);
         }
 
         // PUT: api/Carts/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateCartItemQuantity(int id, Cart cartItem)
+        public async Task<IActionResult> UpdateCart(int id, Cart cartItem)
         {
             if (id != cartItem.CartId)
             {
@@ -77,7 +77,7 @@ namespace QuickServe.Controllers
             {
                 if (!CartItemExists(id))
                 {
-                    return NotFound();
+                    return NotFound("Cart item not found.");
                 }
                 else
                 {
@@ -85,28 +85,28 @@ namespace QuickServe.Controllers
                 }
             }
 
-            return NoContent();
+            return Ok("Cart item updated successfully.");
         }
 
         // DELETE: api/Carts/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCartItem(int id)
+        public async Task<IActionResult> DeleteCart(int id)
         {
             var cartItem = await _context.Cart.FindAsync(id);
             if (cartItem == null)
             {
-                return NotFound();
+                return NotFound("Cart item not found.");
             }
 
             _context.Cart.Remove(cartItem);
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            return Ok("Cart item deleted successfully.");
         }
 
         // GET: api/Carts/User/5
         [HttpGet("User/{userId}")]
-        public async Task<ActionResult<IEnumerable<Cart>>> GetCartItemsByUserId(int userId)
+        public async Task<ActionResult<IEnumerable<Cart>>> GetCartByUserId(int userId)
         {
             var cartItems = await _context.Cart.Where(c => c.UserId == userId).ToListAsync();
             if (cartItems == null || !cartItems.Any())
@@ -122,6 +122,31 @@ namespace QuickServe.Controllers
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
