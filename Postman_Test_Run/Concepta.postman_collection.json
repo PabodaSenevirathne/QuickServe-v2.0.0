@@ -1,0 +1,693 @@
+{
+	"info": {
+		"_postman_id": "2f99ceb3-26c8-4ecb-a924-2d2c17533589",
+		"name": "Concepta",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31100580"
+	},
+	"item": [
+		{
+			"name": "getAllProducts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5101/api/Products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5101",
+					"path": [
+						"api",
+						"Products"
+					],
+					"query": [
+						{
+							"key": "productId",
+							"value": "1",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addProduct",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\r\n{\r\n    \"description\": \"Product12\",\r\n    \"image\": \"img/Product12.jpg\",\r\n    \"price\": 10,\r\n    \"shippingCost\": 12\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5101/api/Products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5101",
+					"path": [
+						"api",
+						"Products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getProduct",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5101/api/Products/12",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5101",
+					"path": [
+						"api",
+						"Products",
+						"12"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateProduct",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\r\n{\r\n    \"id\": \"12\",\r\n    \"description\": \"Product12\",\r\n    \"image\": \"img/Product12.jpg\",\r\n    \"price\": 100,\r\n    \"shippingCost\": 12\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5101/api/Products/12",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5101",
+					"path": [
+						"api",
+						"Products",
+						"12"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteProduct",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5101/api/Products/12",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5101",
+					"path": [
+						"api",
+						"Products",
+						"12"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllUsers",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5101/api/Users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5101",
+					"path": [
+						"api",
+						"Users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addUser",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\" : \"John\",\r\n    \"lastName\" : \"John10\",\r\n    \"email\": \"user10@example.com\",\r\n    \"password\": \"password1234\",\r\n    \"username\": \"john_doe\",\r\n    \"shippingAddress\": \"126 Main Street\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5101/api/Users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5101",
+					"path": [
+						"api",
+						"Users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateUser",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": \"10\",\r\n    \"firstName\" : \"John\",\r\n    \"lastName\" : \"John10\",\r\n    \"email\": \"user10@example.com\",\r\n    \"password\": \"password12345\",\r\n    \"username\": \"john_doe\",\r\n    \"shippingAddress\": \"126 Main Street\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5101/api/Users/10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5101",
+					"path": [
+						"api",
+						"Users",
+						"10"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getUser",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5101/api/Users/10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5101",
+					"path": [
+						"api",
+						"Users",
+						"10"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteUser",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5101/api/Users/10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5101",
+					"path": [
+						"api",
+						"Users",
+						"10"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addOrder",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\": \"7\",\r\n    \"productId\": 11,\r\n    \"quantity\": 18\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5101/api/Orders",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5101",
+					"path": [
+						"api",
+						"Orders"
+					],
+					"query": [
+						{
+							"key": "action",
+							"value": "addOrder",
+							"disabled": true
+						},
+						{
+							"key": "userId",
+							"value": "3",
+							"disabled": true
+						},
+						{
+							"key": "productId",
+							"value": "8",
+							"disabled": true
+						},
+						{
+							"key": "quantity",
+							"value": "8",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllOrders",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5101/api/Orders",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5101",
+					"path": [
+						"api",
+						"Orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getOrder",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5101/api/Orders/11",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5101",
+					"path": [
+						"api",
+						"Orders",
+						"11"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getOrdersByUserID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5101/api/Orders/User/7",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5101",
+					"path": [
+						"api",
+						"Orders",
+						"User",
+						"7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateOrder",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n        \"orderId\": 11,\r\n        \"userId\": 5,\r\n        \"productId\": 10,\r\n        \"quantity\": 22\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5101/api/Orders/11",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5101",
+					"path": [
+						"api",
+						"Orders",
+						"11"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "cancelOrder",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5101/api/Orders/11",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5101",
+					"path": [
+						"api",
+						"Orders",
+						"11"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addComment",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"productId\": 15,\r\n\"userId\": 8,\r\n\"rating\": 5,\r\n\"image\":\"img/image-10\",\r\n\"text\":\"Great Product\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5101/api/Comments",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5101",
+					"path": [
+						"api",
+						"Comments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getComment",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5101/api/Comments/8",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5101",
+					"path": [
+						"api",
+						"Comments",
+						"8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getCommentsByProductId",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5101/api/Comments/Product/15",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5101",
+					"path": [
+						"api",
+						"Comments",
+						"Product",
+						"15"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteComment",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5101/api/Comments/8",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5101",
+					"path": [
+						"api",
+						"Comments",
+						"8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addToCart",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\": 24,\r\n    \"productId\": 16,\r\n    \"quantity\": 22\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5101/api/Carts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5101",
+					"path": [
+						"api",
+						"Carts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getCarts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5101/api/Carts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5101",
+					"path": [
+						"api",
+						"Carts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetCartByCartId",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5101/api/Carts/10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5101",
+					"path": [
+						"api",
+						"Carts",
+						"10"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateCart",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"cartId\": 10,\r\n    \"userId\": 24,\r\n    \"productId\": 16,\r\n    \"quantity\": 100\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5101/api/Carts/10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5101",
+					"path": [
+						"api",
+						"Carts",
+						"10"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteCart",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5101/api/Carts/10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5101",
+					"path": [
+						"api",
+						"Carts",
+						"10"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetCartByUserId",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5101/api/Carts/User/24",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5101",
+					"path": [
+						"api",
+						"Carts",
+						"User",
+						"24"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
