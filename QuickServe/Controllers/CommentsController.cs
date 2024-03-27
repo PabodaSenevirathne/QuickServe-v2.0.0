@@ -26,7 +26,7 @@ namespace QuickServe.Controllers
             var comments = await _context.Comments.ToListAsync();
             if (comments == null || !comments.Any())
             {
-                return NotFound();
+                return NotFound("No comments found.");
             }
             return comments;
         }
@@ -38,7 +38,7 @@ namespace QuickServe.Controllers
             var comment = await _context.Comments.FindAsync(id);
             if (comment == null)
             {
-                return NotFound();
+                return NotFound("Comment not found."); ;
             }
             return comment;
         }
@@ -66,7 +66,7 @@ namespace QuickServe.Controllers
             var comment = await _context.Comments.FindAsync(id);
             if (comment == null)
             {
-                return NotFound();
+                return NotFound("Comment not found.");
             }
 
             _context.Comments.Remove(comment);
@@ -83,7 +83,7 @@ namespace QuickServe.Controllers
             var comments = await _context.Comments.Where(c => c.ProductId == productId).ToListAsync();
             if (comments == null || !comments.Any())
             {
-                return NotFound();
+                return NotFound("No comments found for the specified product ID.");
             }
             return comments;
         }

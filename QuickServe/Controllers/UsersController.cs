@@ -26,7 +26,7 @@ namespace QuickServe.Controllers
             var users = await _context.Users.ToListAsync();
             if (users == null || !users.Any())
             {
-                return NotFound();
+                return NotFound("No users found.");
             }
             return users;
         }
@@ -38,7 +38,7 @@ namespace QuickServe.Controllers
             var user = await _context.Users.FindAsync(id);
             if (user == null)
             {
-                return NotFound();
+                return NotFound("User not found.");
             }
             return user;
         }
@@ -64,7 +64,7 @@ namespace QuickServe.Controllers
         {
             if (id != user.Id)
             {
-                return BadRequest();
+                return BadRequest("Invalid user ID.");
             }
 
             _context.Entry(user).State = EntityState.Modified;
@@ -77,7 +77,7 @@ namespace QuickServe.Controllers
             {
                 if (!UserExists(id))
                 {
-                    return NotFound();
+                    return NotFound("User not found.");
                 }
                 else
                 {
@@ -96,7 +96,7 @@ namespace QuickServe.Controllers
             var user = await _context.Users.FindAsync(id);
             if (user == null)
             {
-                return NotFound();
+                return NotFound("User not found.");
             }
 
             _context.Users.Remove(user);

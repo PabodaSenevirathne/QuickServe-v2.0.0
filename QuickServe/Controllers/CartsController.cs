@@ -26,7 +26,7 @@ namespace QuickServe.Controllers
             var carts = await _context.Cart.ToListAsync();
             if (carts == null || !carts.Any())
             {
-                return NotFound();
+                return NotFound("Cart is empty.");
             }
             return carts;
         }
@@ -38,7 +38,7 @@ namespace QuickServe.Controllers
             var cartItem = await _context.Cart.FindAsync(id);
             if (cartItem == null)
             {
-                return NotFound();
+                return NotFound("Cart item not found.");
             }
             return cartItem;
         }
@@ -64,7 +64,7 @@ namespace QuickServe.Controllers
         {
             if (id != cartItem.CartId)
             {
-                return BadRequest();
+                return BadRequest("Invalid cart ID.");
             }
 
             _context.Entry(cartItem).State = EntityState.Modified;
@@ -111,7 +111,7 @@ namespace QuickServe.Controllers
             var cartItems = await _context.Cart.Where(c => c.UserId == userId).ToListAsync();
             if (cartItems == null || !cartItems.Any())
             {
-                return NotFound();
+                return NotFound("Cart is empty for the specified user ID.");
             }
             return cartItems;
         }

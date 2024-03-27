@@ -35,7 +35,7 @@ namespace QuickServe.Controllers
 
             if (product == null)
             {
-                return NotFound();
+                return NotFound("Product not found.");
             }
 
             return product;
@@ -57,7 +57,7 @@ namespace QuickServe.Controllers
         {
             if (id != product.Id)
             {
-                return BadRequest();
+                return BadRequest("Invalid product ID.");
             }
 
             _context.Entry(product).State = EntityState.Modified;
@@ -70,7 +70,7 @@ namespace QuickServe.Controllers
             {
                 if (!ProductExists(id))
                 {
-                    return NotFound();
+                    return NotFound("Product not found.");
                 }
                 else
                 {

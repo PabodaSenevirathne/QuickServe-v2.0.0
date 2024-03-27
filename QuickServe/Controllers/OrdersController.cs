@@ -26,7 +26,7 @@ namespace QuickServe.Controllers
             var orders = await _context.Orders.ToListAsync();
             if (orders == null || !orders.Any())
             {
-                return NotFound();
+                return NotFound("No orders found.");
             }
             return orders;
         }
@@ -38,7 +38,7 @@ namespace QuickServe.Controllers
             var order = await _context.Orders.FindAsync(id);
             if (order == null)
             {
-                return NotFound();
+                return NotFound("Order not found.");
             }
             return order;
         }
@@ -65,7 +65,7 @@ namespace QuickServe.Controllers
             var orders = await _context.Orders.Where(o => o.UserId == userId).ToListAsync();
             if (orders == null || !orders.Any())
             {
-                return NotFound();
+                return NotFound("No orders found for the specified user ID.");
             }
             return orders;
         }
@@ -76,7 +76,7 @@ namespace QuickServe.Controllers
         {
             if (id != order.OrderId)
             {
-                return BadRequest();
+                return BadRequest("Invalid order ID.");
             }
 
             _context.Entry(order).State = EntityState.Modified;
@@ -89,7 +89,7 @@ namespace QuickServe.Controllers
             {
                 if (!OrderExists(id))
                 {
-                    return NotFound();
+                    return NotFound("Order not found.");
                 }
                 else
                 {
@@ -107,7 +107,7 @@ namespace QuickServe.Controllers
             var order = await _context.Orders.FindAsync(id);
             if (order == null)
             {
-                return NotFound();
+                return NotFound("Order not found.");
             }
 
             _context.Orders.Remove(order);
